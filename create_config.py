@@ -50,8 +50,41 @@ def get_setting(file_path, section, setting):
     print(msg)
     return value
 
+
+def update_setting(file_path, section, setting, value):
+    """
+    Update a config setting.
+    :param file_path:
+    :param section:
+    :param setting:
+    :param value:
+    :return:
+    """
+    config = get_config(file_path)
+    config.set(section, setting, value)
+    with open(file_path, "w") as config_file:
+        config.write(config_file)
+
+
+def delete_setting(file_path, section, setting):
+    """
+    Delete a config setting
+    :param file_path:
+    :param section:
+    :param setting:
+    :return:
+    """
+    config = get_config(file_path)
+    config.remove_option(section, setting)
+    with open(file_path, "w") as config_file:
+        config.write(config_file)
+
 if __name__ == "__main__":
     path = "settings.ini"
     # create_config(path)
     font = get_setting(path, 'Settings', 'font')
     font_size = get_setting(path, 'Settings', 'font_size')
+
+    update_setting(path, "Settings", "font_size", "12")
+
+    delete_setting(path, "Settings", "font_style")

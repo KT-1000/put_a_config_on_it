@@ -3,6 +3,11 @@ import os
 
 
 def create_config(file_path):
+    """
+    Create a config file.
+    :param file_path:
+    :return:
+    """
     config = configparser.ConfigParser()
     config.add_section("Settings")
     config.set("Settings", "font", "Courier")
@@ -14,33 +19,39 @@ def create_config(file_path):
         config.write(config_file)
 
 
-def crud_config(file_path):
+def get_config(file_path):
     """
-    Create, read, update or delete a config file.
+    Get a config object
     :param file_path:
-    :return:
+    :return config: Config obj
     """
     if not os.path.exists(file_path):
         create_config(file_path)
 
     config = configparser.ConfigParser()
-    config.read(file_path)
+    config.read(path)
 
-    # read some values from the config
-    font = config.get("Settings", "font")
-    font_size = config.get("Settings", "font_size")
+    return config
 
-    # change a vlue in the config
-    config.set("Settings", "font_size", "12")
 
-    # delete a value from the config
-    config.remove_option("Settings", "font_style")
-
-    # write changes back to config
-    with open(file_path, "w") as config_file:
-        config.write(config_file)
+def get_setting(file_path, section, setting):
+    """
+    Print a setting to console.
+    :param file_path:
+    :param section:
+    :param setting:
+    :return value:
+    """
+    config = get_config(file_path)
+    value = config.get(section, setting)
+    msg = "{section} {setting} is {value}". format(section=section,
+                                                   setting=setting,
+                                                   value=value)
+    print(msg)
+    return value
 
 if __name__ == "__main__":
     path = "settings.ini"
     # create_config(path)
-    crud_config(path)
+    font = get_setting(path, 'Settings', 'font')
+    font_size = get_setting(path, 'Settings', 'font_size')

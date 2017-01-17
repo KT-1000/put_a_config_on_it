@@ -7,3 +7,5 @@ Traceback (most recent call last):
 RuntimeError
 INFO:root:Informational message.
 ERROR:root:An error has occurred!
+INFO:root:Program started
+INFO:root:Done!

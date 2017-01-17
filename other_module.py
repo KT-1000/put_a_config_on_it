@@ -1,6 +1,6 @@
 import logging
 
-module_logger = logging.getLogger("example_app.other_module")
+module_logger = logging.getLogger("exampleApp.other_module")
 
 
 def add(x, y):
@@ -10,7 +10,7 @@ def add(x, y):
     :param y:
     :return:
     """
-    logger = logging.getLogger("example_app.other_module.add")
+    logger = logging.getLogger("exampleApp.other_module.add")
     logger.info("added %s and %s to get %s" % (x, y, x+y))
 
     return x + y
